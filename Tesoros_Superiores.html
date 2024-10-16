@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesoros Superiores</title>
+    <style>
+        /* Estilos para el fondo de la página */
+        body {
+            background-image: url('fondo.png'); /* Asegúrate de que la imagen esté en la misma carpeta */
+            background-size: cover; /* Cubre toda la pantalla */
+            background-repeat: no-repeat; /* No repetir la imagen */
+            color: white; /* Cambia el color del texto si es necesario */
+        }
+
+        /* Estilos para el contenido */
+        #contenido {
+            margin-left: 220px; /* Espacio para el menú lateral */
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente para mejorar la legibilidad */
+            border-radius: 10px; /* Bordes redondeados */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="menu-container"></div> <!-- Cargar menú lateral aquí -->
+
+    <div id="contenido">
+        <h1>Emboscada</h1>
+        <button id="tirarBtn">Tirar Dado</button>
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        // Cargar el menú lateral desde el archivo menu.html
+        fetch('menu.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('menu-container').innerHTML = data;
+                
+                // Establecer el valor del desplegable con localStorage
+                const vidasSelect = document.getElementById('vidas');
+                vidasSelect.value = localStorage.getItem('vidas') || 5; // Valor predeterminado
+
+                // Actualizar localStorage cuando cambie el valor
+                vidasSelect.addEventListener('change', () => {
+                    localStorage.setItem('vidas', vidasSelect.value);
+                });
+            })
+            .catch(error => console.error('Error al cargar el menú:', error));
+
+        // Funcionalidad para tirar los dados
+        document.getElementById('tirarBtn').addEventListener('click', () => {
+            const vidasSelect = document.getElementById('vidas');
+            let vidas = parseInt(vidasSelect.value); // Obtener el número de vidas
+
+            const tiradaD10 = Math.floor(Math.random() * 10) + 1; // Tirada de 1d10
+            const resultado = document.getElementById('resultado');
+
+            resultado.textContent = `Tirada D10: ${tiradaD10}`;
+
+            // Comprobar si la tirada es 9 o 10
+            if (tiradaD10 >= 9) {
+                const tiradaD20 = Math.floor(Math.random() * 20) + 1; // Tirada de 1d20
+                resultado.textContent += `, tirada D20: ${tiradaD20}`;
+
+                // Lógica para restar vidas
+                if (tiradaD20 >= 1 && tiradaD20 <= 10) {
+                    vidas -= 2; // Restar 2 vidas
+                    resultado.textContent += ` - Has perdido 2 vidas.`;
+                } else if (tiradaD20 >= 11 && tiradaD20 <= 20) {
+                    vidas -= 4; // Restar 4 vidas
+                    resultado.textContent += ` - Has perdido 4 vidas.`;
+                }
+                vidasSelect.value = vidas; // Actualizar el desplegable
+                localStorage.setItem('vidas', vidas); // Actualizar el valor en localStorage
+
+                resultado.textContent += ` Vidas restantes: ${vidas}`;
+            }
+        });
+    </script>
+
+</body>
+</html>
