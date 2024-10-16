@@ -1,0 +1,42 @@
+/* Estilo básico de la página */
+body {
+    font-family: Arial, sans-serif;
+    color: #fff;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+}
+
+.menu {
+    width: 25%;
+    height: 100%;
+}
+
+.menu-frame {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.main-content {
+    width: 75%;
+    text-align: center;
+    padding-top: 50px;
+}
+
+button {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.legend-image {
+    margin-top: 20px;
+    max-width: 80%;
+    height: auto;
+    border: 2px solid white;
+}
