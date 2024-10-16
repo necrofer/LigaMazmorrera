@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tesoros Superiores</title>
+    <title>Tesoro Superiores</title>
     <style>
         /* Estilos para el fondo de la página */
         body {
@@ -38,7 +38,7 @@
             .then(response => response.text())
             .then(data => {
                 document.getElementById('menu-container').innerHTML = data;
-                
+
                 // Establecer el valor del desplegable con localStorage
                 const vidasSelect = document.getElementById('vidas');
                 vidasSelect.value = localStorage.getItem('vidas') || 5; // Valor predeterminado
@@ -62,21 +62,26 @@
 
             // Comprobar si la tirada es 9 o 10
             if (tiradaD10 >= 9) {
-                const tiradaD20 = Math.floor(Math.random() * 20) + 1; // Tirada de 1d20
-                resultado.textContent += `, tirada D20: ${tiradaD20}`;
+                // Comprobar si las vidas son mayores o iguales a 5 para la tirada D20
+                if (vidas >= 5) {
+                    const tiradaD20 = Math.floor(Math.random() * 20) + 1; // Tirada de 1d20
+                    resultado.textContent += `, tirada D20: ${tiradaD20}`;
 
-                // Lógica para restar vidas
-                if (tiradaD20 >= 1 && tiradaD20 <= 10) {
-                    vidas -= 2; // Restar 2 vidas
-                    resultado.textContent += ` - Has perdido 2 vidas.`;
-                } else if (tiradaD20 >= 11 && tiradaD20 <= 20) {
-                    vidas -= 4; // Restar 4 vidas
-                    resultado.textContent += ` - Has perdido 4 vidas.`;
+                    // Lógica para restar vidas
+                    if (tiradaD20 >= 1 && tiradaD20 <= 10) {
+                        vidas -= 2; // Restar 2 vidas
+                        resultado.textContent += ` - Has perdido 2 vidas.`;
+                    } else if (tiradaD20 >= 11 && tiradaD20 <= 20) {
+                        vidas -= 4; // Restar 4 vidas
+                        resultado.textContent += ` - Has perdido 4 vidas.`;
+                    }
+                    vidasSelect.value = vidas; // Actualizar el desplegable
+                    localStorage.setItem('vidas', vidas); // Actualizar el valor en localStorage
+
+                    resultado.textContent += ` Vidas restantes: ${vidas}`;
+                } else {
+                    resultado.textContent += `, no se hace tirada D20 porque las vidas son menos de 5.`;
                 }
-                vidasSelect.value = vidas; // Actualizar el desplegable
-                localStorage.setItem('vidas', vidas); // Actualizar el valor en localStorage
-
-                resultado.textContent += ` Vidas restantes: ${vidas}`;
             }
         });
     </script>
