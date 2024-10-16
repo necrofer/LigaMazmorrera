@@ -32,12 +32,13 @@ body {
     border: none;
 }
 
-/* Contenido principal centrado */
+/* Contenido principal movido al 30% desde el margen izquierdo */
 .main-content {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 75%;
+    margin-left: 30%; /* Mueve el contenido principal un 30% desde el margen izquierdo */
 }
 
 .center-content {
