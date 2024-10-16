@@ -52,7 +52,9 @@
 
         // Funcionalidad para tirar los dados
         document.getElementById('tirarBtn').addEventListener('click', () => {
-            const vidas = parseInt(document.getElementById('vidas').value); // Obtener el número de vidas
+            const vidasSelect = document.getElementById('vidas');
+            let vidas = parseInt(vidasSelect.value); // Obtener el número de vidas
+
             const tiradaD10 = Math.floor(Math.random() * 10) + 1; // Tirada de 1d10
             const resultado = document.getElementById('resultado');
 
@@ -60,12 +62,21 @@
 
             // Comprobar si la tirada es 9 o 10
             if (tiradaD10 >= 9) {
-                if (vidas > 6) {
-                    const tiradaD20 = Math.floor(Math.random() * 20) + 1; // Tirada de 1d20
-                    resultado.textContent += `, tirada D20: ${tiradaD20}`;
-                } else {
-                    resultado.textContent += `, no se hace tirada D20 porque las vidas son ${vidas}.`;
+                const tiradaD20 = Math.floor(Math.random() * 20) + 1; // Tirada de 1d20
+                resultado.textContent += `, tirada D20: ${tiradaD20}`;
+
+                // Lógica para restar vidas
+                if (tiradaD20 >= 1 && tiradaD20 <= 10) {
+                    vidas -= 2; // Restar 2 vidas
+                    resultado.textContent += ` - Has perdido 2 vidas.`;
+                } else if (tiradaD20 >= 11 && tiradaD20 <= 20) {
+                    vidas -= 4; // Restar 4 vidas
+                    resultado.textContent += ` - Has perdido 4 vidas.`;
                 }
+                vidasSelect.value = vidas; // Actualizar el desplegable
+                localStorage.setItem('vidas', vidas); // Actualizar el valor en localStorage
+
+                resultado.textContent += ` Vidas restantes: ${vidas}`;
             }
         });
     </script>
