@@ -91,6 +91,7 @@
         <div class="container">
             <button id="randomCardBtn">Sacar carta de tesoro</button>
             <div class="card" id="card-display">Tu carta aparecerá aquí</div>
+            <audio id="audio-player" src="" preload="auto"></audio> <!-- Elemento de audio -->
         </div>
     </div>
 
@@ -106,18 +107,26 @@
         // Funcionalidad de sacar carta aleatoria
         const cardDisplay = document.getElementById('card-display');
         const randomCardBtn = document.getElementById('randomCardBtn');
-        
+        const audioPlayer = document.getElementById('audio-player');
+
+        // Definir cartas como un array de objetos
         const cards = [
-            "tesoro1.jpg",
-            "tesoro2.jpg",
-            "tesoro3.jpg",
-            "tesoro4.jpg" // Añade las cartas que tienes
+            { image: "tesoro1.jpg", audio: "tesoro1.mp3" },
+            { image: "tesoro2.jpg", audio: "tesoro2.mp3" },
+            { image: "tesoro3.jpg", audio: "tesoro3.mp3" }
+            // Añade más tesoros según sea necesario
         ];
 
         randomCardBtn.addEventListener('click', () => {
             const randomIndex = Math.floor(Math.random() * cards.length);
             const selectedCard = cards[randomIndex];
-            cardDisplay.style.backgroundImage = `url('Tesoros/${selectedCard}')`;
+
+            // Cambiar la imagen de la carta
+            cardDisplay.style.backgroundImage = `url('Tesoros/${selectedCard.image}')`;
+
+            // Reproducir el audio correspondiente
+            audioPlayer.src = `Tesoros/${selectedCard.audio}`;
+            audioPlayer.play();
         });
     </script>
 
