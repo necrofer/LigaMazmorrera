@@ -12,7 +12,7 @@
             top: 0;
             left: 0;
             height: 100%;
-            background-color: #333;
+            background-color: rgba(51, 51, 51, 0.9); /* Añadir un poco de transparencia */
             color: white;
             padding: 20px;
             box-sizing: border-box;
@@ -73,10 +73,20 @@
             border: none;
             border-radius: 5px;
             margin-bottom: 20px;
+            margin-right: 10px; /* Espacio entre botones */
         }
 
         button:hover {
             background-color: #555;
+        }
+
+        /* Estilo para el fondo */
+        body {
+            background-image: url('fondo.png');
+            background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
+            background-position: center; /* Centra la imagen de fondo */
+            margin: 0; /* Elimina el margen predeterminado */
+            color: white; /* Cambiar color de texto a blanco */
         }
     </style>
 </head>
@@ -90,6 +100,7 @@
         <h1>Tesoros Aleatorios</h1>
         <div class="container">
             <button id="randomCardBtn">Sacar carta de tesoro</button>
+            <button id="shuffleBtn">Barajar Tesoros</button> <!-- Nuevo botón para barajar -->
             <div class="card" id="card-display">Tu carta aparecerá aquí</div>
             <audio id="audio-player" src="" preload="auto"></audio> <!-- Elemento de audio -->
         </div>
@@ -107,6 +118,7 @@
         // Funcionalidad de sacar carta aleatoria
         const cardDisplay = document.getElementById('card-display');
         const randomCardBtn = document.getElementById('randomCardBtn');
+        const shuffleBtn = document.getElementById('shuffleBtn'); // Botón de barajar
         const audioPlayer = document.getElementById('audio-player');
 
         // Definir cartas como un array de objetos
@@ -117,6 +129,7 @@
             // Añade más tesoros según sea necesario
         ];
 
+        // Funcionalidad para sacar una carta aleatoria
         randomCardBtn.addEventListener('click', () => {
             const randomIndex = Math.floor(Math.random() * cards.length);
             const selectedCard = cards[randomIndex];
@@ -127,6 +140,13 @@
             // Reproducir el audio correspondiente
             audioPlayer.src = `Tesoros/${selectedCard.audio}`;
             audioPlayer.play();
+        });
+
+        // Funcionalidad para barajar y ocultar la carta
+        shuffleBtn.addEventListener('click', () => {
+            cardDisplay.style.backgroundImage = `none`; // Ocultar la carta actual
+            audioPlayer.pause(); // Detener cualquier audio en reproducción
+            audioPlayer.src = ""; // Limpiar el src del audio
         });
     </script>
 
