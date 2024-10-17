@@ -7,15 +7,16 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
+            background-color: #404040;
+            color: white;
         }
         .menu-lateral {
-            background-color: #404040;
             color: white;
             width: 300px;
             padding: 20px;
             height: 100vh;
             position: fixed;
+            background-color: #404040;
         }
         .menu-lateral h2 {
             font-family: 'Georgia', serif;
@@ -35,6 +36,7 @@
             color: white;
             font-size: 18px;
             margin-left: 10px;
+            cursor: pointer;
         }
         .menu-lateral .section {
             margin-bottom: 20px;
@@ -52,6 +54,12 @@
         .menu-lateral .nav-buttons button:hover {
             background-color: #555;
         }
+        /* Estilo del mensaje de alerta */
+        .alerta {
+            color: yellow;
+            font-weight: bold;
+            display: none; /* Inicialmente oculto */
+        }
     </style>
 </head>
 <body>
@@ -59,6 +67,9 @@
 <div class="menu-lateral">
     <div class="section">
         <h2>Moral</h2>
+        <!-- Mensaje de alerta -->
+        <p id="alerta" class="alerta">Todos Sufren -20 DET</p>
+
         <label>Max. <input id="maxMoral" type="number" value="18" min="1" max="20"></label><br><br>
         <label>Med. <input id="medMoral" type="number" value="9" readonly></label><br><br>
         <label>Moral Actual <input id="moralActual" type="number" value="14" min="1" max="20"></label>
@@ -90,16 +101,19 @@
     const moralActual = document.getElementById('moralActual');
     const moralIncrement = document.getElementById('moralIncrement');
     const moralDecrement = document.getElementById('moralDecrement');
+    const alerta = document.getElementById('alerta');
 
     // Actualizar el valor de Med automáticamente
     maxMoral.addEventListener('input', function() {
         medMoral.value = Math.floor(maxMoral.value / 2);
+        checkMoral();
     });
 
     // Botón de incrementar Moral Actual
     moralIncrement.addEventListener('click', function() {
         if (moralActual.value < maxMoral.value) {
             moralActual.value = parseInt(moralActual.value) + 1;
+            checkMoral();
         }
     });
 
@@ -107,8 +121,18 @@
     moralDecrement.addEventListener('click', function() {
         if (moralActual.value > 1) {
             moralActual.value = parseInt(moralActual.value) - 1;
+            checkMoral();
         }
     });
+
+    // Función para verificar si la moral es menor a la media
+    function checkMoral() {
+        if (parseInt(moralActual.value) < parseInt(medMoral.value)) {
+            alerta.style.display = 'block'; // Muestra el mensaje si Moral Actual es menor que Med
+        } else {
+            alerta.style.display = 'none'; // Oculta el mensaje si es igual o mayor
+        }
+    }
 
     // Funcionalidad de Amenaza
     const minAmenaza = document.getElementById('minAmenaza');
@@ -129,7 +153,11 @@
             amenazaActual.value = parseInt(amenazaActual.value) - 1;
         }
     });
+
+    // Ejecutar al cargar la página para verificar el estado inicial de la moral
+    checkMoral();
 </script>
 
 </body>
 </html>
+
