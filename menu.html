@@ -70,6 +70,11 @@
             display: none;
  text-align: center;
         }
+.input-group label {
+    display: inline-block;
+    margin-right: 20px; /* Espacio entre los elementos */
+}
+
     </style>
 </head>
 <body>
@@ -79,8 +84,11 @@
         <h2>Moral</h2>
         
 
-        <label>Max. <input id="maxMoral" type="number" value="18" min="1" max="20"></label>
-        <label>Med. <input id="medMoral" type="number" value="9" readonly></label>
+      <div class="input-group">
+    <label>Max. <input id="maxMoral" type="number" value="18" min="1" max="20"></label>
+    <label>Med. <input id="medMoral" type="number" value="9" readonly></label>
+</div>
+
 <p  id="alerta" class="alerta">Todos Sufren -20 DET</p><br><br>
         <label>Moral Actual <input id="moralActual" type="number" value="14" min="1" max="20"></label>
         <button id="moralIncrement">+</button>
