@@ -103,7 +103,7 @@
 <br>
         
         <label>Evento <input id="eventoAmenaza" type="number" value="12" min="1" max="20"></label><br><br>
-        <label>Amenaza Actual <input id="amenazaActual" type="number" value="7" min="1" max="20"></label>
+        <label>NA. Actual <input id="amenazaActual" type="number" value="7" min="1" max="20"></label>
         <button id="amenazaIncrement">+</button>
         <button id="amenazaDecrement">-</button>
     </div>
@@ -117,7 +117,8 @@
     </div>
 </div>
 
-<audio id="moralBajaAudio" src="moral_baja.MP3" preload="auto"></audio>
+<audio id="moralBajaAudio" src="sonidos/moral_baja.MP3" preload="auto"></audio>
+<audio id="eventoAmenazaAudio" src="sonidos/evento_amenaza.MP3" preload="auto"></audio>
 
 <script>
     // Funcionalidad de Moral
@@ -135,7 +136,7 @@
     const amenazaActual = document.getElementById('amenazaActual');
     const amenazaIncrement = document.getElementById('amenazaIncrement');
     const amenazaDecrement = document.getElementById('amenazaDecrement');
-
+    const eventoAmenazaAudio = document.getElementById('eventoAmenazaAudio');
     // Guardar en localStorage al cambiar los valores
     function saveValues() {
         // Guardar todos los valores de Moral
@@ -196,7 +197,9 @@
 
         if (currentMoral < currentMed) {
             alerta.style.display = 'block';
-            moralBajaAudio.play();
+		if(currentMoral = currentMed-1)
+{
+            moralBajaAudio.play();}
         } else {
             alerta.style.display = 'none';
             moralBajaAudio.pause();
