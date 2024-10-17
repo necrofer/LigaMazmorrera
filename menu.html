@@ -45,15 +45,23 @@
             width: 100%;
             padding: 10px;
             margin-top: 10px;
-            background-color: #666;
-            border: none;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
+             border: none;
+  color: white;
+  padding: 14px 28px;
+  cursor: pointer;
+  border-radius: 5px;
+  /* Color base del botón */
+  transition: transform 0.3s ease-in-out; /* Transición suave del efecto de pulsación */
+ background-image: linear-gradient(to right, #6c757d, #adb5bd);
+
         }
         .menu-lateral .nav-buttons button:hover {
-            background-color: #555;
+           linear-gradient(to right, #848b92, #adb5bd);/* Cambia el color al pasar el cursor sobre el botón */
         }
+.menu-lateral .nav-buttons button:active {
+           transform: scale(0.80);/* Reduce ligeramente el tamaño del botón cuando se hace clic */
+        }
+
         /* Estilo del mensaje de alerta */
         .alerta {
             color: yellow;
