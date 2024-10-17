@@ -42,36 +42,32 @@
             margin-bottom: 20px;
         }
         .menu-lateral .nav-buttons button {
-          width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border: none;
-    color: white;
-    padding: 14px 28px;
-    cursor: pointer;
-    border-radius: 5px;
-    /* Color base del botón */
-    transition: transform 0.3s ease-in-out; /* Transición suave del efecto de pulsación */
-    background-image: linear-gradient(to right, #6c757d, #adb5bd);
-    text-align: center; /* Asegura que el texto esté centrado horizontalmente */
-    line-height: normal; /* Esto es para evitar que el texto se desplace */
-    display: flex; /* Usamos flexbox */
-    justify-content: center; /* Centrado horizontal */
-    align-items: center; /* Centrado vertical */
-
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            color: white;
+            padding: 14px 28px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: transform 0.3s ease-in-out;
+            background-image: linear-gradient(to right, #6c757d, #adb5bd);
+            text-align: center;
+            line-height: normal;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .menu-lateral .nav-buttons button:hover {
-           linear-gradient(to right, #848b92, #adb5bd);/* Cambia el color al pasar el cursor sobre el botón */
+            background-color: #848b92;
         }
-.menu-lateral .nav-buttons button:active {
-           transform: scale(0.80);/* Reduce ligeramente el tamaño del botón cuando se hace clic */
+        .menu-lateral .nav-buttons button:active {
+            transform: scale(0.80);
         }
-
-        /* Estilo del mensaje de alerta */
         .alerta {
             color: yellow;
             font-weight: bold;
-            display: none; /* Inicialmente oculto */
+            display: none;
         }
     </style>
 </head>
@@ -80,7 +76,6 @@
 <div class="menu-lateral">
     <div class="section">
         <h2>Moral</h2>
-        <!-- Mensaje de alerta -->
         <p id="alerta" class="alerta">Todos Sufren -20 DET</p>
 
         <label>Max. <input id="maxMoral" type="number" value="18" min="1" max="20"></label><br><br>
@@ -99,15 +94,14 @@
         <button id="amenazaDecrement">-</button>
     </div>
 
-   <div class="nav-buttons">
-    <button onclick="window.top.location.href='tesoros.html'">Tesoros</button>
-    <button onclick="window.top.location.href='objetos_legendarios.html'">Objetos Legendarios</button>
-    <button onclick="window.top.location.href='eventos.html'">Eventos</button>
-    <button onclick="window.top.location.href='trampas.html'">Trampas</button>
-</div>
+    <div class="nav-buttons">
+        <button onclick="saveAndNavigate('tesoros.html')">Tesoros</button>
+        <button onclick="saveAndNavigate('objetos_legendarios.html')">Objetos Legendarios</button>
+        <button onclick="saveAndNavigate('eventos.html')">Eventos</button>
+        <button onclick="saveAndNavigate('Trampas.html')">Trampas</button>
+    </div>
 </div>
 
-<!-- Añadimos el elemento de audio -->
 <audio id="moralBajaAudio" src="moral_baja.MP3" preload="auto"></audio>
 
 <script>
@@ -118,34 +112,44 @@
     const moralIncrement = document.getElementById('moralIncrement');
     const moralDecrement = document.getElementById('moralDecrement');
     const alerta = document.getElementById('alerta');
-    const moralBajaAudio = document.getElementById('moralBajaAudio'); // Audio de moral baja
+    const moralBajaAudio = document.getElementById('moralBajaAudio');
 
-    // Actualizar el valor de Med automáticamente
-    maxMoral.addEventListener('input', function() {
-        medMoral.value = Math.floor(maxMoral.value / 2);
-        checkMoral();
-    });
+    const minAmenaza = document.getElementById('minAmenaza');
+    const amenazaActual = document.getElementById('amenazaActual');
+    const amenazaIncrement = document.getElementById('amenazaIncrement');
+    const amenazaDecrement = document.getElementById('amenazaDecrement');
 
-    // Botón de incrementar Moral Actual
-    moralIncrement.addEventListener('click', function() {
-        const maxVal = parseInt(maxMoral.value);
-        const currentMoral = parseInt(moralActual.value);
+    // Guardar en localStorage al cambiar los valores
+    function saveValues() {
+        localStorage.setItem('maxMoral', maxMoral.value);
+        localStorage.setItem('moralActual', moralActual.value);
+        localStorage.setItem('minAmenaza', minAmenaza.value);
+        localStorage.setItem('amenazaActual', amenazaActual.value);
+    }
 
-        if (currentMoral < maxVal) {
-            moralActual.value = currentMoral + 1;
-            checkMoral();
+    // Cargar los valores de localStorage si existen
+    function loadValues() {
+        if (localStorage.getItem('maxMoral')) {
+            maxMoral.value = localStorage.getItem('maxMoral');
         }
-    });
-
-    // Botón de decrementar Moral Actual
-    moralDecrement.addEventListener('click', function() {
-        const currentMoral = parseInt(moralActual.value);
-
-        if (currentMoral > 1) {
-            moralActual.value = currentMoral - 1;
-            checkMoral();
+        if (localStorage.getItem('moralActual')) {
+            moralActual.value = localStorage.getItem('moralActual');
         }
-    });
+        if (localStorage.getItem('minAmenaza')) {
+            minAmenaza.value = localStorage.getItem('minAmenaza');
+        }
+        if (localStorage.getItem('amenazaActual')) {
+            amenazaActual.value = localStorage.getItem('amenazaActual');
+        }
+        medMoral.value = Math.floor(maxMoral.value / 2); // Recalcular media
+        checkMoral(); // Verificar la moral cargada
+    }
+
+    // Navegar a una página guardando los valores antes
+    function saveAndNavigate(url) {
+        saveValues(); // Guardar valores en localStorage
+        window.location.href = url; // Navegar a la nueva página
+    }
 
     // Función para verificar si la moral es menor a la media
     function checkMoral() {
@@ -153,37 +157,56 @@
         const currentMed = parseInt(medMoral.value);
 
         if (currentMoral < currentMed) {
-            alerta.style.display = 'block'; // Muestra el mensaje si Moral Actual es menor que Med
-            moralBajaAudio.play(); // Reproduce el audio
+            alerta.style.display = 'block';
+            moralBajaAudio.play();
         } else {
-            alerta.style.display = 'none'; // Oculta el mensaje si es igual o mayor
-            moralBajaAudio.pause(); // Pausa el audio si estaba en reproducción
-            moralBajaAudio.currentTime = 0; // Reinicia el audio para que se reproduzca desde el principio la próxima vez
+            alerta.style.display = 'none';
+            moralBajaAudio.pause();
+            moralBajaAudio.currentTime = 0;
         }
     }
 
-    // Funcionalidad de Amenaza
-    const minAmenaza = document.getElementById('minAmenaza');
-    const amenazaActual = document.getElementById('amenazaActual');
-    const amenazaIncrement = document.getElementById('amenazaIncrement');
-    const amenazaDecrement = document.getElementById('amenazaDecrement');
+    // Eventos para cambiar valores
+    maxMoral.addEventListener('input', function() {
+        medMoral.value = Math.floor(maxMoral.value / 2);
+        checkMoral();
+        saveValues(); // Guardar al cambiar el valor
+    });
 
-    // Botón de incrementar Amenaza Actual
+    moralIncrement.addEventListener('click', function() {
+        if (parseInt(moralActual.value) < parseInt(maxMoral.value)) {
+            moralActual.value = parseInt(moralActual.value) + 1;
+            checkMoral();
+            saveValues(); // Guardar al incrementar
+        }
+    });
+
+    moralDecrement.addEventListener('click', function() {
+        if (parseInt(moralActual.value) > 1) {
+            moralActual.value = parseInt(moralActual.value) - 1;
+            checkMoral();
+            saveValues(); // Guardar al decrementar
+        }
+    });
+
     amenazaIncrement.addEventListener('click', function() {
-        if (amenazaActual.value < 20) {
+        if (parseInt(amenazaActual.value) < 20) {
             amenazaActual.value = parseInt(amenazaActual.value) + 1;
+            saveValues(); // Guardar al incrementar
         }
     });
 
-    // Botón de decrementar Amenaza Actual
     amenazaDecrement.addEventListener('click', function() {
-        if (amenazaActual.value > minAmenaza.value) {
+        if (parseInt(amenazaActual.value) > parseInt(minAmenaza.value)) {
             amenazaActual.value = parseInt(amenazaActual.value) - 1;
+            saveValues(); // Guardar al decrementar
         }
     });
 
-    // Ejecutar al cargar la página para verificar el estado inicial de la moral
-    checkMoral();
+    // Cargar valores al iniciar la página
+    window.onload = function() {
+        loadValues(); // Cargar valores guardados
+    };
 </script>
 
 </body>
