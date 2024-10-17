@@ -1,157 +1,135 @@
-<!-- menu.html -->
-<div id="menu-lateral">
-    <h3>Configuración</h3>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Lateral</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+        }
+        .menu-lateral {
+            background-color: #404040;
+            color: white;
+            width: 300px;
+            padding: 20px;
+            height: 100vh;
+            position: fixed;
+        }
+        .menu-lateral h2 {
+            font-family: 'Georgia', serif;
+            margin-bottom: 10px;
+        }
+        .menu-lateral input {
+            width: 50px;
+            padding: 5px;
+            text-align: center;
+        }
+        .menu-lateral button {
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 50%;
+            background-color: #777;
+            color: white;
+            font-size: 18px;
+            margin-left: 10px;
+        }
+        .menu-lateral .section {
+            margin-bottom: 20px;
+        }
+        .menu-lateral .nav-buttons button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #666;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .menu-lateral .nav-buttons button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
 
-    <label for="na-min">NA Min:</label>
-    <select id="na-min">
-        <!-- Opciones del 1 al 20 -->
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-        <option value="16">16</option>
-        <option value="17">17</option>
-        <option value="18">18</option>
-        <option value="19">19</option>
-        <option value="20">20</option>
-    </select>
+<div class="menu-lateral">
+    <div class="section">
+        <h2>Moral</h2>
+        <label>Max. <input id="maxMoral" type="number" value="18" min="1" max="20"></label><br><br>
+        <label>Med. <input id="medMoral" type="number" value="9" readonly></label><br><br>
+        <label>Moral Actual <input id="moralActual" type="number" value="14" min="1" max="20"></label>
+        <button id="moralIncrement">+</button>
+        <button id="moralDecrement">-</button>
+    </div>
 
-    <label for="na-evento">NA Evento:</label>
-    <select id="na-evento">
-        <!-- Opciones del 1 al 20 -->
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-        <option value="16">16</option>
-        <option value="17">17</option>
-        <option value="18">18</option>
-        <option value="19">19</option>
-        <option value="20">20</option>
-    </select>
+    <div class="section">
+        <h2>Amenaza</h2>
+        <label>Min. <input id="minAmenaza" type="number" value="2" min="1" max="20"></label><br><br>
+        <label>Evento <input id="eventoAmenaza" type="number" value="12" min="1" max="20"></label><br><br>
+        <label>Amenaza Actual <input id="amenazaActual" type="number" value="7" min="1" max="20"></label>
+        <button id="amenazaIncrement">+</button>
+        <button id="amenazaDecrement">-</button>
+    </div>
 
-    <label for="na-max">NA Max:</label>
-    <select id="na-max">
-        <!-- Opciones del 1 al 20 -->
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-        <option value="16">16</option>
-        <option value="17">17</option>
-        <option value="18">18</option>
-        <option value="19">19</option>
-        <option value="20">20</option>
-    </select>
-
-    <br><br>
-
-    <label for="moral-grupo-max">Moral Grupo Max:</label>
-    <select id="moral-grupo-max" onchange="updateMoralMitad()">
-        <!-- Opciones del 1 al 20 -->
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-        <option value="16">16</option>
-        <option value="17">17</option>
-        <option value="18">18</option>
-        <option value="19">19</option>
-        <option value="20">20</option>
-    </select>
-
-    <label for="moral-grupo">Moral Grupo:</label>
-    <select id="moral-grupo">
-        <!-- Opciones del 1 al 20 -->
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-        <option value="16">16</option>
-        <option value="17">17</option>
-        <option value="18">18</option>
-        <option value="19">19</option>
-        <option value="20">20</option>
-    </select>
-
-    <br><br>
-
-    <label for="moral-grupo-mitad">Moral Grupo Mitad:</label>
-    <input type="number" id="moral-grupo-mitad" readonly>
-
-    <nav>
-        <ul>
-            <li><a href="Tirada_de_dados.html">Tirada de dados</a></li>
-            <li><a href="Eventos.html">Eventos</a></li>
-            <li><a href="Tesoros_Comunes.html">Tesoros Comunes</a></li>
-            <li><a href="Tesoros_Superiores.html">Tesoros Superiores</a></li>
-            <li><a href="Tesoros_Maravillosos.html">Tesoros Maravillosos</a></li>
-            <li><a href="Tesoros_Legendarios.html">Tesoros Legendarios</a></li>
-            <li><a href="Trampas.html">Trampas</a></li>
-        </ul>
-    </nav>
+    <div class="nav-buttons">
+        <button onclick="window.location.href='tesoros.html'">Tesoros</button>
+        <button onclick="window.location.href='objetos_legendarios.html'">Objetos Legendarios</button>
+        <button onclick="window.location.href='eventos.html'">Eventos</button>
+        <button onclick="window.location.href='trampas.html'">Trampas</button>
+    </div>
 </div>
 
 <script>
-    // Función para actualizar el campo "Moral Grupo Mitad"
-    function updateMoralMitad() {
-        var moralMax = document.getElementById("moral-grupo-max").value;
-        var moralMitad = Math.floor(moralMax / 2);
-        document.getElementById("moral-grupo-mitad").value = moralMitad;
-    }
+    // Funcionalidad de Moral
+    const maxMoral = document.getElementById('maxMoral');
+    const medMoral = document.getElementById('medMoral');
+    const moralActual = document.getElementById('moralActual');
+    const moralIncrement = document.getElementById('moralIncrement');
+    const moralDecrement = document.getElementById('moralDecrement');
+
+    // Actualizar el valor de Med automáticamente
+    maxMoral.addEventListener('input', function() {
+        medMoral.value = Math.floor(maxMoral.value / 2);
+    });
+
+    // Botón de incrementar Moral Actual
+    moralIncrement.addEventListener('click', function() {
+        if (moralActual.value < maxMoral.value) {
+            moralActual.value = parseInt(moralActual.value) + 1;
+        }
+    });
+
+    // Botón de decrementar Moral Actual
+    moralDecrement.addEventListener('click', function() {
+        if (moralActual.value > 1) {
+            moralActual.value = parseInt(moralActual.value) - 1;
+        }
+    });
+
+    // Funcionalidad de Amenaza
+    const minAmenaza = document.getElementById('minAmenaza');
+    const amenazaActual = document.getElementById('amenazaActual');
+    const amenazaIncrement = document.getElementById('amenazaIncrement');
+    const amenazaDecrement = document.getElementById('amenazaDecrement');
+
+    // Botón de incrementar Amenaza Actual
+    amenazaIncrement.addEventListener('click', function() {
+        if (amenazaActual.value < 20) {
+            amenazaActual.value = parseInt(amenazaActual.value) + 1;
+        }
+    });
+
+    // Botón de decrementar Amenaza Actual
+    amenazaDecrement.addEventListener('click', function() {
+        if (amenazaActual.value > minAmenaza.value) {
+            amenazaActual.value = parseInt(amenazaActual.value) - 1;
+        }
+    });
 </script>
+
+</body>
+</html>
