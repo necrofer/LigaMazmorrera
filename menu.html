@@ -94,6 +94,9 @@
     </div>
 </div>
 
+<!-- Añadimos el elemento de audio -->
+<audio id="moralBajaAudio" src="moral_baja.MP3" preload="auto"></audio>
+
 <script>
     // Funcionalidad de Moral
     const maxMoral = document.getElementById('maxMoral');
@@ -102,6 +105,7 @@
     const moralIncrement = document.getElementById('moralIncrement');
     const moralDecrement = document.getElementById('moralDecrement');
     const alerta = document.getElementById('alerta');
+    const moralBajaAudio = document.getElementById('moralBajaAudio'); // Audio de moral baja
 
     // Actualizar el valor de Med automáticamente
     maxMoral.addEventListener('input', function() {
@@ -137,8 +141,11 @@
 
         if (currentMoral < currentMed) {
             alerta.style.display = 'block'; // Muestra el mensaje si Moral Actual es menor que Med
+            moralBajaAudio.play(); // Reproduce el audio
         } else {
             alerta.style.display = 'none'; // Oculta el mensaje si es igual o mayor
+            moralBajaAudio.pause(); // Pausa el audio si estaba en reproducción
+            moralBajaAudio.currentTime = 0; // Reinicia el audio para que se reproduzca desde el principio la próxima vez
         }
     }
 
