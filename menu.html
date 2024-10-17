@@ -111,23 +111,31 @@
 
     // Botón de incrementar Moral Actual
     moralIncrement.addEventListener('click', function() {
-        if (moralActual.value < maxMoral.value) {
-            moralActual.value = parseInt(moralActual.value) + 1;
+        const maxVal = parseInt(maxMoral.value);
+        const currentMoral = parseInt(moralActual.value);
+
+        if (currentMoral < maxVal) {
+            moralActual.value = currentMoral + 1;
             checkMoral();
         }
     });
 
     // Botón de decrementar Moral Actual
     moralDecrement.addEventListener('click', function() {
-        if (moralActual.value > 1) {
-            moralActual.value = parseInt(moralActual.value) - 1;
+        const currentMoral = parseInt(moralActual.value);
+
+        if (currentMoral > 1) {
+            moralActual.value = currentMoral - 1;
             checkMoral();
         }
     });
 
     // Función para verificar si la moral es menor a la media
     function checkMoral() {
-        if (parseInt(moralActual.value) < parseInt(medMoral.value)) {
+        const currentMoral = parseInt(moralActual.value);
+        const currentMed = parseInt(medMoral.value);
+
+        if (currentMoral < currentMed) {
             alerta.style.display = 'block'; // Muestra el mensaje si Moral Actual es menor que Med
         } else {
             alerta.style.display = 'none'; // Oculta el mensaje si es igual o mayor
@@ -160,4 +168,3 @@
 
 </body>
 </html>
-
