@@ -3,123 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tesoros</title>
+    <title>Objetos Superiores</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Estilos del menú lateral */
-        #menu-lateral {
-            width: 200px;
+        /* Estilos para el menú lateral */
+        .menu {
             position: fixed;
-            top: 0;
             left: 0;
+            top: 0;
             height: 100%;
-            background-color: #333;
-            color: white;
+            width: 300px; /* Ancho del menú lateral */
+        }
+
+        .menu-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Estilos para el contenido principal */
+        .main-content {
+            margin-left: 310px; /* Espacio para que el contenido no quede oculto tras el menú */
             padding: 20px;
-            box-sizing: border-box;
-        }
-
-        #menu-lateral nav ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        #menu-lateral nav ul li {
-            margin: 10px 0;
-        }
-
-        #menu-lateral nav ul li a {
-            color: white;
-            text-decoration: none;
-            padding: 10px;
-            display: block;
-        }
-
-        #menu-lateral nav ul li a:hover {
-            background-color: #444;
-        }
-
-        /* Estilos para el contenido */
-        #contenido {
-            margin-left: 220px; /* Espacio para el menú lateral */
-            padding: 20px;
-        }
-
-        /* Estilos para la carta y el botón */
-        .card {
-            width: 300px;
-            height: 400px;
-            border: 2px solid #333;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            background-color: #fff;
-            background-size: cover;
-            background-position: center;
-            margin: 0 auto; /* Centrar la carta */
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        .container {
+        .center-content {
             text-align: center;
+        }
+
+        .legend-image {
+            width: 400px; /* Ajusta el tamaño de la imagen */
         }
 
         button {
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-
-        button:hover {
-            background-color: #555;
+            margin: 10px;
         }
     </style>
 </head>
-<body>
+<body style="background-image: url('fondo.png'); background-size: cover;">
 
-    <!-- Contenedor para el menú lateral -->
-    <div id="menu-container"></div>
+    <!-- Carga del menú lateral -->
+    <div class="menu">
+        <iframe src="menu.html" frameborder="0" class="menu-frame"></iframe>
+    </div>
 
-    <!-- Contenido de la página de tesoros -->
-    <div id="contenido">
-        <h1>Tesoros Aleatorios</h1>
-        <div class="container">
-            <button id="randomCardBtn">Sacar carta de tesoro</button>
-            <div class="card" id="card-display">Tu carta aparecerá aquí</div>
+    <!-- Zona de contenido principal centrada -->
+    <div class="main-content">
+        <div class="center-content">
+            <button onclick="cambiarImagen()" id="legendario-btn">Objetos Superiores</button>
+            <button onclick="restaurarImagen()" id="barajar-btn">Barajar Objetos Superiores</button>
+            <br><br>
+            <img src="objetos_legendarios.png" id="imagen-legendaria" alt="Objeto Legendario" class="legend-image">
         </div>
     </div>
 
-    <script>
-        // Cargar el menú lateral desde el archivo menu.html
-        fetch('menu.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('menu-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error al cargar el menú:', error));
-
-        // Funcionalidad de sacar carta aleatoria
-        const cardDisplay = document.getElementById('card-display');
-        const randomCardBtn = document.getElementById('randomCardBtn');
-        
-        const cards = [
-            "tesoro1.jpg",
-            "tesoro2.jpg",
-            "tesoro3.jpg",
-            "tesoro4.jpg" // Añade las cartas que tienes
-        ];
-
-        randomCardBtn.addEventListener('click', () => {
-            const randomIndex = Math.floor(Math.random() * cards.length);
-            const selectedCard = cards[randomIndex];
-            cardDisplay.style.backgroundImage = `url('Tesoros/${selectedCard}')`;
-        });
-    </script>
-
+    <script src="main.js"></script>
 </body>
 </html>
