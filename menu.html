@@ -95,10 +95,11 @@
     </div>
 
     <div class="nav-buttons">
-        <button onclick="saveAndNavigate('tesoros.html')">Tesoros</button>
-        <button onclick="saveAndNavigate('objetos_legendarios.html')">Objetos Legendarios</button>
-        <button onclick="saveAndNavigate('eventos.html')">Eventos</button>
-        <button onclick="saveAndNavigate('trampas.html')">Trampas</button>
+        <!-- Añadimos target="_top" en cada botón para asegurar que las páginas se abran en el marco principal -->
+        <button onclick="saveAndNavigate('tesoros.html')" target="_top">Tesoros</button>
+        <button onclick="saveAndNavigate('objetos_legendarios.html')" target="_top">Objetos Legendarios</button>
+        <button onclick="saveAndNavigate('eventos.html')" target="_top">Eventos</button>
+        <button onclick="saveAndNavigate('trampas.html')" target="_top">Trampas</button>
     </div>
 </div>
 
@@ -165,7 +166,7 @@
     // Navegar a una página guardando los valores antes
     function saveAndNavigate(url) {
         saveValues(); // Guardar valores en localStorage
-        window.location.href = url; // Navegar a la nueva página
+        window.top.location.href = url; // Navegar a la nueva página en el marco principal
     }
 
     // Función para verificar si la moral es menor a la media
@@ -206,23 +207,4 @@
         }
     });
 
-    amenazaIncrement.addEventListener('click', function() {
-        if (parseInt(amenazaActual.value) < 20) {
-            amenazaActual.value = parseInt(amenazaActual.value) + 1;
-            saveValues(); // Guardar al incrementar
-        }
-    });
 
-    amenazaDecrement.addEventListener('click', function() {
-        if (parseInt(amenazaActual.value) > parseInt(minAmenaza.value)) {
-            amenazaActual.value = parseInt(amenazaActual.value) - 1;
-            saveValues(); // Guardar al decrementar
-        }
-    });
-
-    // Cargar los valores cuando se carga la página
-    window.onload = loadValues;
-</script>
-
-</body>
-</html>
