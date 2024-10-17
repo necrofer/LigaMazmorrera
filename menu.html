@@ -207,6 +207,21 @@
         }
     }
 
+    // Función para verificar si la moral es menor a la media
+    function checkAmenaza() {
+        const currentAmenaza = parseInt(amenazaActual.value);
+        const currentEvento = parseInt(eventoAmenaza.value);
+
+        if (currentAmenaza == currentMed) {
+            
+	    eventoAmenazaAudio.play();}
+        } else {
+                        eventoAmenazaAudio.pause();
+            eventoAmenazaAudio.currentTime = 0;
+        }
+    }
+
+
     // Eventos para cambiar valores
     maxMoral.addEventListener('input', function() {
         medMoral.value = Math.floor(maxMoral.value / 2);
@@ -233,6 +248,7 @@
     amenazaIncrement.addEventListener('click', function() {
         if (parseInt(amenazaActual.value) < 20) {
             amenazaActual.value = parseInt(amenazaActual.value) + 1;
+checkAmenaza();
             saveValues();
         }
     });
@@ -240,6 +256,7 @@
     amenazaDecrement.addEventListener('click', function() {
         if (parseInt(amenazaActual.value) > parseInt(minAmenaza.value)) {
             amenazaActual.value = parseInt(amenazaActual.value) - 1;
+checkAmenaza();
             saveValues();
         }
     });
