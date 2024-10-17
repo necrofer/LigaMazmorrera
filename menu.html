@@ -98,7 +98,7 @@
         <button onclick="saveAndNavigate('tesoros.html')">Tesoros</button>
         <button onclick="saveAndNavigate('objetos_legendarios.html')">Objetos Legendarios</button>
         <button onclick="saveAndNavigate('eventos.html')">Eventos</button>
-        <button onclick="saveAndNavigate('Trampas.html')">Trampas</button>
+        <button onclick="saveAndNavigate('trampas.html')">Trampas</button>
     </div>
 </div>
 
@@ -115,33 +115,50 @@
     const moralBajaAudio = document.getElementById('moralBajaAudio');
 
     const minAmenaza = document.getElementById('minAmenaza');
+    const eventoAmenaza = document.getElementById('eventoAmenaza');
     const amenazaActual = document.getElementById('amenazaActual');
     const amenazaIncrement = document.getElementById('amenazaIncrement');
     const amenazaDecrement = document.getElementById('amenazaDecrement');
 
     // Guardar en localStorage al cambiar los valores
     function saveValues() {
+        // Guardar todos los valores de Moral
         localStorage.setItem('maxMoral', maxMoral.value);
+        localStorage.setItem('medMoral', medMoral.value);
         localStorage.setItem('moralActual', moralActual.value);
+
+        // Guardar todos los valores de Amenaza
         localStorage.setItem('minAmenaza', minAmenaza.value);
+        localStorage.setItem('eventoAmenaza', eventoAmenaza.value);
         localStorage.setItem('amenazaActual', amenazaActual.value);
     }
 
     // Cargar los valores de localStorage si existen
     function loadValues() {
+        // Cargar todos los valores de Moral
         if (localStorage.getItem('maxMoral')) {
             maxMoral.value = localStorage.getItem('maxMoral');
+        }
+        if (localStorage.getItem('medMoral')) {
+            medMoral.value = localStorage.getItem('medMoral');
+        } else {
+            medMoral.value = Math.floor(maxMoral.value / 2); // Recalcular si no está guardado
         }
         if (localStorage.getItem('moralActual')) {
             moralActual.value = localStorage.getItem('moralActual');
         }
+
+        // Cargar todos los valores de Amenaza
         if (localStorage.getItem('minAmenaza')) {
             minAmenaza.value = localStorage.getItem('minAmenaza');
+        }
+        if (localStorage.getItem('eventoAmenaza')) {
+            eventoAmenaza.value = localStorage.getItem('eventoAmenaza');
         }
         if (localStorage.getItem('amenazaActual')) {
             amenazaActual.value = localStorage.getItem('amenazaActual');
         }
-        medMoral.value = Math.floor(maxMoral.value / 2); // Recalcular media
+
         checkMoral(); // Verificar la moral cargada
     }
 
@@ -203,10 +220,8 @@
         }
     });
 
-    // Cargar valores al iniciar la página
-    window.onload = function() {
-        loadValues(); // Cargar valores guardados
-    };
+    // Cargar los valores cuando se carga la página
+    window.onload = loadValues;
 </script>
 
 </body>
