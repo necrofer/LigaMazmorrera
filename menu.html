@@ -89,7 +89,7 @@
     <label>Med. <input id="medMoral" type="number" value="9" readonly></label>
 </div>
 
-<p  id="alerta" class="alerta">Todos Sufren -20 DET</p><br><br>
+<p  id="alerta" class="alerta">Todos Sufren -20 DET</p>
         <label>Moral Actual <input id="moralActual" type="number" value="14" min="1" max="20"></label>
         <button id="moralIncrement">+</button>
         <button id="moralDecrement">-</button>
@@ -97,7 +97,12 @@
 
     <div class="section">
         <h2>Amenaza</h2>
-        <label>Min. <input id="minAmenaza" type="number" value="2" min="1" max="20"></label><br><br>
+<div class="input-group">
+    <label>Min. <input id="minAmenaza" type="number" value="2" min="1" max="20"></label>
+    <label>Max. <input id="maxAmenaza" type="number" value="20" min="1" max="20"></label>
+</div>
+
+        
         <label>Evento <input id="eventoAmenaza" type="number" value="12" min="1" max="20"></label><br><br>
         <label>Amenaza Actual <input id="amenazaActual" type="number" value="7" min="1" max="20"></label>
         <button id="amenazaIncrement">+</button>
@@ -126,6 +131,7 @@
     const moralBajaAudio = document.getElementById('moralBajaAudio');
 
     const minAmenaza = document.getElementById('minAmenaza');
+    const maxAmenaza = document.getElementById('maxAmenaza');
     const eventoAmenaza = document.getElementById('eventoAmenaza');
     const amenazaActual = document.getElementById('amenazaActual');
     const amenazaIncrement = document.getElementById('amenazaIncrement');
@@ -140,6 +146,7 @@
 
         // Guardar todos los valores de Amenaza
         localStorage.setItem('minAmenaza', minAmenaza.value);
+        localStorage.setItem('maxAmenaza', maxAmenaza.value);
         localStorage.setItem('eventoAmenaza', eventoAmenaza.value);
         localStorage.setItem('amenazaActual', amenazaActual.value);
     }
@@ -163,6 +170,10 @@
         if (localStorage.getItem('minAmenaza')) {
             minAmenaza.value = localStorage.getItem('minAmenaza');
         }
+        if (localStorage.getItem('maxAmenaza')) {
+            minAmenaza.value = localStorage.getItem('maxAmenaza');
+        }
+
         if (localStorage.getItem('eventoAmenaza')) {
             eventoAmenaza.value = localStorage.getItem('eventoAmenaza');
         }
