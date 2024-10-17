@@ -1,8 +1,10 @@
 <!-- menu.html -->
 <div id="menu-lateral">
-     <h3>Configuración</h3>
-    <label for="vidas">Vidas:</label>
-    <select id="vidas">
+    <h3>Configuración</h3>
+
+    <label for="na-min">NA Min:</label>
+    <select id="na-min">
+        <!-- Opciones del 1 al 20 -->
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
@@ -13,7 +15,125 @@
         <option value="8">8</option>
         <option value="9">9</option>
         <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
     </select>
+
+    <label for="na-evento">NA Evento:</label>
+    <select id="na-evento">
+        <!-- Opciones del 1 al 20 -->
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+    </select>
+
+    <label for="na-max">NA Max:</label>
+    <select id="na-max">
+        <!-- Opciones del 1 al 20 -->
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+    </select>
+
+    <br><br>
+
+    <label for="moral-grupo-max">Moral Grupo Max:</label>
+    <select id="moral-grupo-max" onchange="updateMoralMitad()">
+        <!-- Opciones del 1 al 20 -->
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+    </select>
+
+    <label for="moral-grupo">Moral Grupo:</label>
+    <select id="moral-grupo">
+        <!-- Opciones del 1 al 20 -->
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+    </select>
+
+    <br><br>
+
+    <label for="moral-grupo-mitad">Moral Grupo Mitad:</label>
+    <input type="number" id="moral-grupo-mitad" readonly>
+
     <nav>
         <ul>
             <li><a href="Tirada_de_dados.html">Tirada de dados</a></li>
@@ -26,3 +146,12 @@
         </ul>
     </nav>
 </div>
+
+<script>
+    // Función para actualizar el campo "Moral Grupo Mitad"
+    function updateMoralMitad() {
+        var moralMax = document.getElementById("moral-grupo-max").value;
+        var moralMitad = Math.floor(moralMax / 2);
+        document.getElementById("moral-grupo-mitad").value = moralMitad;
+    }
+</script>
