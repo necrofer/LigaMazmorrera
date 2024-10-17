@@ -207,14 +207,14 @@
         }
     }
 
-    // Función para verificar si la moral es menor a la media
+    // Función para verificar si la amenaza es mayor a la del evento
     function checkAmenaza() {
         const currentAmenaza = parseInt(amenazaActual.value);
         const currentEvento = parseInt(eventoAmenaza.value);
 
         if (currentAmenaza == currentMed) {
             
-	    eventoAmenazaAudio.play();}
+	    eventoAmenazaAudio.play();
         } else {
                         eventoAmenazaAudio.pause();
             eventoAmenazaAudio.currentTime = 0;
