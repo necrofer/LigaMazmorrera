@@ -207,4 +207,24 @@
         }
     });
 
+    amenazaIncrement.addEventListener('click', function() {
+        if (parseInt(amenazaActual.value) < 20) {
+            amenazaActual.value = parseInt(amenazaActual.value) + 1;
+            saveValues();
+        }
+    });
 
+    amenazaDecrement.addEventListener('click', function() {
+        if (parseInt(amenazaActual.value) > parseInt(minAmenaza.value)) {
+            amenazaActual.value = parseInt(amenazaActual.value) - 1;
+            saveValues();
+        }
+    });
+
+    window.onload = function() {
+        loadValues(); // Cargar los valores al cargar la página
+    };
+</script>
+
+</body>
+</html>
